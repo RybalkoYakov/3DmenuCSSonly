@@ -1,0 +1,140 @@
+:root {
+    --default_font_size: 10px;
+
+    --face_height: 100px;
+    --face_width: 350px;
+    --item_font_size: 1.8em;
+    --item_move_left: -25px;
+    --perspective_length: 85em;
+
+    --cube_rotation: 30deg;
+
+    --face_gap_positive: calc(var(--face_height) / 2);
+    --face_gap_negative: calc(0px - var(--face_height) / 2);
+    --face_full_gap: calc(0px - var(--face_height));
+    --face_long_gap: calc(var(--face_width) - var(--face_gap_positive));
+
+    --bg_gradient_from: #91879d;
+    --bg_gradient_to: #ffe7b8;
+    --text_color: #ffffff;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-size: var(--default_font_size);
+    text-decoration: none;
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(45deg, var(--bg_gradient_from), var(--bg_gradient_to));
+    transform-style: preserve-3d;
+
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transform-style: preserve-3d;
+    perspective: var(--perspective_length);
+}
+
+.cube {
+    position: relative;
+    width: var(--face_width);
+    height: var(--face_height);
+    transform-style: preserve-3d;
+    transform: rotate3d(0,1,0, var(--cube_rotation));
+    cursor: pointer;
+    transition: .5s;
+}
+
+.cube:hover {
+    transform: translate3d(var(--item_move_left), 0 , 17.5px) rotate3d(0,1,0, var(--cube_rotation));
+}
+
+.face {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--cube_border_color);
+    backface-visibility: hidden;
+}
+
+.face__text a{
+    color: var(--text_color);
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    font-size: var(--item_font_size);
+    text-shadow: 0 0 5px 4px var(--text_color);
+}
+
+.face__icon {
+    color: var(--text_color);
+}
+
+.face__end {
+    width: var(--face_height);
+    height: var(--face_height);
+}
+
+.face__top {
+    width: var(--face_width);
+    height: var(--face_height);
+}
+
+.face__first {
+    background-color: var(--cube_color);
+    transform:
+            rotate3d(0,-1,0, 90deg)
+            translate3d(var(--face_gap_negative), 0px, var(--face_gap_positive));
+}
+
+.face__second {
+    background-color: var(--cube_color);
+    transform:
+            rotate3d(0,0,0, 90deg)
+            translate3d(0,0,0);
+}
+
+.face__third {
+    background-color: var(--cube_color);
+    transform:
+            rotate3d(1,0,0, 90deg)
+            translate3d(0,var(--face_gap_negative), var(--face_gap_positive));
+}
+
+.face__fourth {
+    background-color: var(--cube_color);
+    transform:
+            rotate3d(0,0,0, 90deg)
+            translate3d(0,0,var(--face_full_gap));
+}
+
+.face__fives {
+    background-color: var(--cube_color);
+    transform:
+            rotate3d(1,0,0, 90deg)
+            translate3d(0,var(--face_gap_negative),var(--face_gap_negative));
+}
+
+.face__sixes {
+    background-color: var(--cube_color);
+    transform:
+            rotate3d(0,1,0, 90deg)
+            translate3d(var(--face_gap_positive),0,var(--face_long_gap));
+}

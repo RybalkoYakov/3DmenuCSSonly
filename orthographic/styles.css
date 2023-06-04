@@ -1,0 +1,90 @@
+:root {
+    --transition_length: 0.5s;
+    --item_width: 200px;
+    --item_height: 40px;
+
+    --shadow_X_offset: -120px;
+    --shadow_Y_offset: 120px;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-size: 10px;
+    font-family: 'Roboto', sans-serif;
+    text-decoration: none;
+}
+
+body {
+    background: linear-gradient(45deg, #792a2a, #885c2a);
+}
+
+.container {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    transform: skewY(-15deg);
+}
+
+.item {
+    position: relative;
+    width: var(--item_width);
+    height: var(--item_height);
+    background-color: var(--color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: var(--transition_length);
+    z-index: var(--index);
+}
+
+.item a {
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 1.3em;
+    color: #ffffff;
+    text-shadow: 0 0 2px 1px rgba(1, 1, 1, 0.25);
+}
+
+.item::before {
+    position: absolute;
+    left: calc(0px - var(--item_height));
+    top: 0;
+    content: '';
+    height: 100%;
+    width: var(--item_height);
+    background-color: var(--color);
+    transform-origin: right;
+    transform: skewY(45deg);
+    transition: var(--transition_length);
+}
+
+.item::after {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: var(--item_height);
+    background-color: var(--color);
+    top: calc(0px - var(--item_height));
+    transform-origin: bottom;
+    transform: skewX(45deg);
+    transition: var(--transition_length);
+}
+
+.item:hover, .item:hover:before, .item:hover:after {
+    background-color: var(--darken_color);
+    transform: translateX(-25px);
+}
+
+.item:hover:before {
+    transform: skewY(45deg);
+}
+.item:hover::after {
+    transform: skewX(45deg);
+}
